@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stockfish Proxy</title>
+</head>
+<body>
+    <h1>Stockfish Proxy</h1>
+    <script>
+        async function fetchAnalysis(fen) {
+            const response = await fetch('https://www.stockfishonline.com/api', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    fen: fen,
+                    depth: 20 // Adjust depth as needed
+                }),
+            });
+            const data = await response.json();
+            return data;
+        }
+
+        // This function is exposed to be called by Violentmonkey script
+        window.fetchStockfishAnalysis = fetchAnalysis;
+    </script>
+</body>
+</html>
