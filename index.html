@@ -11,18 +11,29 @@
     <p id="result"></p>
     <script>
         async function fetchAnalysis(fen) {
-            const response = await fetch('https://www.stockfishonline.com/api', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    fen: fen,
-                    depth: 20 // Adjust depth as needed
-                }),
-            });
-            const data = await response.json();
-            return data;
+            const corsProxyUrl = 'https://cors-anywhere.herokuapp.com/';
+            const stockfishApiUrl = 'https://www.stockfishonline.com/api';
+            
+            try {
+                const response = await fetch(`${corsProxyUrl}${stockfishApiUrl}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        fen: fen,
+                        depth: 20
+                    }),
+                });
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+                return data;
+            } catch (error) {
+                console.error('Error fetching analysis:', error); // Log the detailed error
+                throw error;
+            }
         }
 
         document.getElementById('analyze-btn').addEventListener('click', async () => {
