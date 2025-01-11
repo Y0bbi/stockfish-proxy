@@ -1,1 +1,7 @@
-
+{
+    "depth": 20,
+    "analysis": {
+        "score": "+0.25",
+        "moves": ["e2e4", "d7d5", "g1f3"]
+    }
+}
