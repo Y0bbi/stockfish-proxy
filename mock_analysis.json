@@ -1,6 +1,6 @@
 {
     "depth": 20,
-    "bestMove": "e2e4", // Added a bestMove key
+    "bestMove": "e2e4", // Ensure this key is present
     "analysis": {
         "score": "+0.25",
         "moves": ["e2e4", "d7d5", "g1f3"]
